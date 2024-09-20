@@ -1,12 +1,12 @@
-import type { IPlugin } from '../library/plugin/types/index.js'
+import type * as Plugin from '../library/plugins'
 
-export default <IPlugin.Interface.Plugin>{
+export default <Plugin.Structure.Interface>{
   Title: 'test-title',
   Description: 'dummy-description',
   Scripts: [{
     Name: 'test-script',
     Description: 'dummy-script-description',
-    Paramaters: ['param1', 'param2'],
+    Parameters: ['param1', 'param2'],
     Function: Hello,
   }],
 }

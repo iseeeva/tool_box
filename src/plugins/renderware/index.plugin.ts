@@ -1,11 +1,11 @@
-import type { IPlugin } from '../../library/plugin/types/index.js'
 import * as FFFF0218 from './psp/ffff0218.js'
+import type * as Plugin from '@/library/plugins'
 
 // Renderware Plugin
 // by iseeeva
 // ----------------------------------------------------------------
 
-export default <IPlugin.Interface.Plugin>{
+export default <Plugin.Structure.Interface>{
   Title: 'renderware',
   Description: 'Renderware Plugin',
   Scripts: [

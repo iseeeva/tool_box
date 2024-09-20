@@ -1,11 +1,11 @@
-import type { IPlugin } from '../../library/plugin/types/index.js'
 import * as Language from './lang/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // True Crime: New York City Plugin
 // by iseeeva
 // ----------------------------------------------------------------
 
-export default <IPlugin.Interface.Plugin>{
+export default <Plugin.Structure.Interface>{
   Title: 'true-crime',
   Description: 'True Crime: New York City Plugin',
   Scripts: [

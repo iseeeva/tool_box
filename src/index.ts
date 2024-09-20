@@ -1,6 +1,5 @@
-import Plugin from './library/plugin/index.js'
-
-globalThis.__basedir = __dirname
+import path from 'node:path'
+import * as Plugins from '@/library/plugins'
 
 const Input = {
   Title: process.argv[2],
@@ -8,19 +7,22 @@ const Input = {
   Parameters: process.argv.slice(4, process.argv.length),
 }
 
-Promise.resolve(Plugin.Initialize()).then(() => {
+Promise.resolve(Plugins.Initialize(path.join(__dirname, './plugins'), { recurvise: true })).then((Plugins) => {
   if (Input.Title == null) {
-    console.log('Iseeeva\'s Tool Box v1.0')
-    console.log('Usage: <Title> <Script> <Parameter> <Parameter>..')
+    console.log('Iseeeva\'s Tool Box')
+    console.log('Usage: <title> <script> <parameter> <parameter>..')
     process.exit()
   }
 
-  const Selected = new Plugin(Input.Title)
+  const Plugin = Plugins.find(Plugin => Plugin.Title === Input.Title)
 
-  if (Input.Script == null) {
-    Selected.Help()
-    process.exit()
+  if (Plugin) {
+    if (Input.Script)
+      Plugin.Execute(Input.Script, Input.Parameters)
+    else
+      Plugin.Help()
   }
-
-  Selected.Execute(Input.Script, Input.Parameters)
+  else {
+    throw new Error(`Selected plugin (${Input.Title}) not found`)
+  }
 })

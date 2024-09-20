@@ -1,16 +1,16 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { Convert, HexReader } from '@twisine/r_lib'
-import type { IPlugin } from '../../../library/plugin/types/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // Uncharted: Golden Abyss BSP File - Version Vita Scripts
 // by iseeeva
 // ----------------------------------------------------------------
 
-export const Exporter: IPlugin.Interface.Script = {
+export const Exporter: Plugin.Script.Interface = {
   Name: 'bsp-exporter',
   Description: 'Exporter for BSP File',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')
@@ -44,7 +44,7 @@ export const Exporter: IPlugin.Interface.Script = {
     // //
     Reader.setOffset(0, 16)
     while (Reader.getOffset(0) < File.length) {
-      const Container: { Size: number; Datas: { Size: number; Value: number | string }[] } = {
+      const Container: { Size: number, Datas: { Size: number, Value: number | string }[] } = {
         Size: 0,
         Datas: [],
       }
@@ -59,7 +59,7 @@ export const Exporter: IPlugin.Interface.Script = {
       const Values: any[] = []
       for (let i = 0; i < 5; i++) {
         Reader.setOffset(0, Reader.getOffset(0) + 1)
-        const Data: { Size: number; Value: number | string } = { Size: 0, Value: '' }
+        const Data: { Size: number, Value: number | string } = { Size: 0, Value: '' }
 
         Data.Size = Calculate()
 
@@ -78,10 +78,10 @@ export const Exporter: IPlugin.Interface.Script = {
   },
 }
 
-export const Builder: IPlugin.Interface.Script = {
+export const Builder: Plugin.Script.Interface = {
   Name: 'bsp-builder',
   Description: 'Builder for BSP File',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')

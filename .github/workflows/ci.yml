@@ -34,8 +34,8 @@ jobs:
       - name: Check Linting
         run: npm run lint
 
-      - name: Check Typing
-        run: npm run typecheck
+      - name: Check Typescript
+        run: npm run ts:check
   build:
     needs: check
     runs-on: ubuntu-latest
@@ -53,8 +53,8 @@ jobs:
 
       - name: Build Project
         if: success()
-        run: npm run build-ts
+        run: npm run ts:build
 
       - name: Run Project
         if: success()
-        run: npm run index
+        run: npm run start

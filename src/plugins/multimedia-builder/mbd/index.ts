@@ -1,16 +1,16 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { HexReader } from '@twisine/r_lib'
-import type { IPlugin } from '../../../library/plugin/types/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // Multimedia Builder MBD Archive - Version 2.7 Scripts
 // by iseeeva
 // ----------------------------------------------------------------
 
-export const Exporter: IPlugin.Interface.Script = {
+export const Exporter: Plugin.Script.Interface = {
   Name: 'mbd-exporter',
   Description: 'Exporter for MBD Files',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')
@@ -37,8 +37,10 @@ export const Exporter: IPlugin.Interface.Script = {
 
       console.log(
         `[File]: ${Indexs[i]}.jpg`,
-        '[Height]:', Reader.read(0, 4, { ...Config.Reader }),
-        '[Width]:', Reader.read(0, 4, { ...Config.Reader }),
+        '[Height]:',
+        Reader.read(0, 4, { ...Config.Reader }),
+        '[Width]:',
+        Reader.read(0, 4, { ...Config.Reader }),
       )
 
       if (Reader.read(0, 4, { ...Config.Reader, addPos: false }) < 5)

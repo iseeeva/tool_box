@@ -1,14 +1,14 @@
-import * as MBD from './mbd/index.js'
+import * as CDIMG from './cdimg/index.js'
 import type * as Plugin from '@/library/plugins'
 
-// Multimedia Builder Plugin
+// Boku no Natsuyasumi Plugin
 // by iseeeva
 // ----------------------------------------------------------------
 
 export default <Plugin.Structure.Interface>{
-  Title: 'multimedia-builder',
-  Description: 'Multimedia Builder Plugin',
+  Title: 'boku-natsuyasumi',
+  Description: 'Boku no Natsuyasumi Plugin',
   Scripts: [
-    MBD.Exporter,
+    CDIMG.Exporter,
   ],
 }

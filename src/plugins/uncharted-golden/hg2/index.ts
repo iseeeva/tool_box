@@ -1,7 +1,7 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { HexReader } from '@twisine/r_lib'
-import type { IPlugin } from '../../../library/plugin/types/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // Uncharted: Golden Abyss HG2 Archive - Version Vita Scripts
 // by iseeeva
@@ -9,10 +9,10 @@ import type { IPlugin } from '../../../library/plugin/types/index.js'
 // Implemented from https://github.com/mhvuze/UGAdata
 // ----------------------------------------------------------------
 
-export const Exporter: IPlugin.Interface.Script = {
+export const Exporter: Plugin.Script.Interface = {
   Name: 'hg2-exporter',
   Description: 'Exporter for HG2 Archive',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')

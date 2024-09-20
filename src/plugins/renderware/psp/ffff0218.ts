@@ -1,16 +1,16 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { HexReader } from '@twisine/r_lib'
-import type { IPlugin } from '../../../library/plugin/types/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // Renderware DAT Archive - Version FFFF0218 Scripts
 // by iseeeva
 // ----------------------------------------------------------------
 
-export const Exporter: IPlugin.Interface.Script = {
+export const Exporter: Plugin.Script.Interface = {
   Name: 'ffff0218',
   Description: 'Exporter for FFFF0218 Archive',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')

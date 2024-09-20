@@ -1,15 +1,15 @@
-import fs from 'fs'
-import path from 'path'
-import type { IPlugin } from '../../../library/plugin/types/index.js'
+import fs from 'node:fs'
+import path from 'node:path'
+import type * as Plugin from '@/library/plugins'
 
 // True Crime: New York City Language DAT Scripts
 // by iseeeva
 // ----------------------------------------------------------------
 
-export const Exporter: IPlugin.Interface.Script = {
+export const Exporter: Plugin.Script.Interface = {
   Name: 'lang-exporter',
   Description: 'Exporter for Language DAT File',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')
@@ -31,7 +31,7 @@ export const Exporter: IPlugin.Interface.Script = {
     }
 
     // //
-    const Store = []
+    const Store: string[] = []
     const Header = {
       Size: Stream.readUint32LE(0) + 4, // 4 Byte + * Content Size
     }
@@ -50,10 +50,10 @@ export const Exporter: IPlugin.Interface.Script = {
   },
 }
 
-export const Importer: IPlugin.Interface.Script = {
+export const Importer: Plugin.Script.Interface = {
   Name: 'lang-importer',
   Description: 'Re-Importer for Language DAT File',
-  Paramaters: ['file'],
+  Parameters: ['file'],
   Function: (Input: string) => {
     if (Input == null)
       throw new Error('File cannot be empty')
@@ -80,7 +80,7 @@ export const Importer: IPlugin.Interface.Script = {
       if (Match) {
         return Buffer.from(Match.map((Byte) => {
           if (Byte.startsWith('\\x'))
-            return parseInt(Byte.slice(2), 16)
+            return Number.parseInt(Byte.slice(2), 16)
           else
             return Byte.charCodeAt(0)
         }))

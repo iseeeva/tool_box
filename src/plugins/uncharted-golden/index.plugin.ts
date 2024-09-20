@@ -1,12 +1,12 @@
-import type { IPlugin } from '../../library/plugin/types/index.js'
 import * as BSP from './bsp/index.js'
 import * as HG2 from './hg2/index.js'
+import type * as Plugin from '@/library/plugins'
 
 // Uncharted: Golden Abyss Plugin
 // by iseeeva
 // ----------------------------------------------------------------
 
-export default <IPlugin.Interface.Plugin>{
+export default <Plugin.Structure.Interface>{
   Title: 'uncharted-golden',
   Description: 'Uncharted: Golden Abyss Plugin',
   Scripts: [
